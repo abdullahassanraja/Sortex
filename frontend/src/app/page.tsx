@@ -74,6 +74,12 @@ export default function LandingPage() {
         {/* Subtle grid background */}
         <div className="absolute inset-0 technical-grid opacity-[0.02] dark:opacity-[0.04] pointer-events-none" />
         
+        {/* Editorial Monochrome Fabric Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-[0.04] dark:opacity-[0.07] mix-blend-luminosity pointer-events-none"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1600&auto=format&fit=crop')" }}
+        />
+        
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 border border-border rounded-full font-mono text-xs tracking-wider uppercase mb-8 bg-muted-bg">
