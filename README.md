@@ -2,7 +2,7 @@
 title: Sortex
 emoji: ♻️
 colorFrom: gray
-colorTo: black
+colorTo: blue
 sdk: docker
 app_port: 7860
 ---
