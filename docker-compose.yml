@@ -1,0 +1,57 @@
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: sortex-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - sortex-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sortex-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - MONGO_DB=sortex_db
+      - JWT_SECRET=supersecretjwtkeyfortextilewasteclassification
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+    depends_on:
+      - mongodb
+    networks:
+      - sortex-network
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sortex-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - sortex-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+
+networks:
+  sortex-network:
+    driver: bridge

@@ -1,0 +1,30 @@
+# Version Control Exclusions
+
+# Python virtual environment and caches
+backend/.venv/
+backend/__pycache__/
+backend/ml/temp_download/
+backend/ml/*.pkl
+.pytest_cache/
+*.pyc
+
+# Node / Next.js builds and dependencies
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+.pnpm-store/
+
+# Environment configurations & local credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
