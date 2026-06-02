@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, status
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel, Field
@@ -247,3 +248,9 @@ def health_check():
         "database": "In-Memory Fallback" if use_in_memory else "MongoDB connected",
         "timestamp": datetime.utcnow().isoformat()
     }
+
+# Mount Next.js static export files for single-container deployment
+frontend_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static_frontend")
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="static")
+
